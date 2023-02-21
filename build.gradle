@@ -1,0 +1,68 @@
+apply plugin: "java"
+apply plugin: "kotlin"
+//apply plugin: "com.github.johnrengelman.shadow"
+//
+//architectury {
+//    common(rootProject.enabled_platforms.split(","))
+//}
+
+
+
+
+//loom {
+////    accessWidenerPath = file("src/main/resources/libgui.accesswidener")
+//}
+
+
+dependencies {
+    modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    modImplementation "dev.architectury:architectury:${rootProject.architectury_version}"
+}
+
+publishing {
+    publications {
+        mavenCommon(MavenPublication) {
+            artifactId = rootProject.archives_base_name
+            from components.java
+        }
+    }
+
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+    repositories {
+        // Add repositories to publish to here.
+    }
+}
+
+//configurations {
+//    shadow
+//}
+
+//processResources {
+//    inputs.property "version", project.version
+//
+//    filesMatching("META-INF/mods.toml") {
+//        expand "version": project.version
+//    }
+//}
+
+
+// for dev jar
+//shadowJar {
+//    exclude "fabric.mod.json"
+//    exclude "architectury.common.json"
+//
+//    configurations = [project.configurations.shadow]
+//    classifier "dev-shadow+${rootProject.minecraft_version}"
+//}
+//
+//remapJar {
+//    input.set shadowJar.archiveFile
+//    dependsOn shadowJar
+//    classifier "shadow+${rootProject.minecraft_version}"
+//}
+//
+//jar {
+//    classifier "dev"
+//}
+//
