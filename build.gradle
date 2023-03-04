@@ -1,12 +1,16 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
+
 apply plugin: "java"
 apply plugin: "kotlin"
-//apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: "com.github.johnrengelman.shadow"
 //
 //architectury {
 //    common(rootProject.enabled_platforms.split(","))
 //}
 
-
+//architectury {
+//    platformSetupLoomIde()
+//}
 
 
 //loom {
@@ -46,15 +50,19 @@ publishing {
 //    }
 //}
 
+task relocateShadowJar(type: ConfigureShadowRelocation) {
+    target = tasks.shadowJar
+    prefix = 'rationale.emotions'
+}
 
 // for dev jar
-//shadowJar {
-//    exclude "fabric.mod.json"
-//    exclude "architectury.common.json"
-//
-//    configurations = [project.configurations.shadow]
-//    classifier "dev-shadow+${rootProject.minecraft_version}"
-//}
+shadowJar {
+    exclude "fabric.mod.json"
+    exclude "architectury.common.json"
+
+    configurations = [project.configurations.shadow]
+    classifier "dev-shadow+${rootProject.minecraft_version}"
+}
 //
 //remapJar {
 //    input.set shadowJar.archiveFile
